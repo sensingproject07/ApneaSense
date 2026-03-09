@@ -1,0 +1,25 @@
+{
+    "project_name": "ApneaSense",
+    "task": "3-class sleep posture classification",
+    "modality": "depth",
+    "classes": {
+        "0": "supine",
+        "1": "left",
+        "2": "right"
+    },
+    "model_name": "ResNet18_depth_encoder",
+    "architecture": "DepthResNet18Classifier",
+    "encoder_backbone": "ResNet-18",
+    "input_channels": 1,
+    "image_size": 224,
+    "batch_size": 32,
+    "num_epochs": 15,
+    "learning_rate": 0.0001,
+    "weight_decay": 0.0001,
+    "optimizer": "Adam",
+    "scheduler": "ReduceLROnPlateau",
+    "loss_function": "CrossEntropyLoss",
+    "train_size": 9585,
+    "val_size": 2025,
+    "test_size": 2160
+}

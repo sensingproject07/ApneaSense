@@ -1,0 +1,14 @@
+{
+    "best_epoch": 13,
+    "best_val_accuracy": 0.9935802469135803,
+    "best_val_macro_f1": 0.9935769303296057,
+    "final_train_loss": 0.00020325852315302673,
+    "final_train_accuracy": 1.0,
+    "final_train_macro_f1": 1.0,
+    "final_val_loss": 0.021848391562091,
+    "final_val_accuracy": 0.9920987654320987,
+    "final_val_macro_f1": 0.9920950835751096,
+    "test_loss": 0.08617395701375143,
+    "test_accuracy": 0.9796296296296296,
+    "test_macro_f1": 0.9796099252583317
+}
