@@ -1,0 +1,67 @@
+{
+  "experiment_name": "joint_xyo_deduplicated",
+  "best_epoch": 20,
+  "best_val_macro_f1": 0.9955620087457393,
+  "test_loss": 0.06629495373409655,
+  "test_accuracy": 0.9777777777777777,
+  "test_macro_f1": 0.977851669708377,
+  "classwise_metrics": {
+    "supine": {
+      "precision": 0.948,
+      "recall": 0.9875,
+      "f1-score": 0.9673469387755103,
+      "support": 240.0
+    },
+    "left": {
+      "precision": 0.9913793103448276,
+      "recall": 0.9583333333333334,
+      "f1-score": 0.9745762711864406,
+      "support": 240.0
+    },
+    "right": {
+      "precision": 0.9957983193277311,
+      "recall": 0.9875,
+      "f1-score": 0.9916317991631799,
+      "support": 240.0
+    },
+    "accuracy": 0.9777777777777777,
+    "macro avg": {
+      "precision": 0.9783925432241863,
+      "recall": 0.9777777777777779,
+      "f1-score": 0.977851669708377,
+      "support": 720.0
+    },
+    "weighted avg": {
+      "precision": 0.9783925432241861,
+      "recall": 0.9777777777777777,
+      "f1-score": 0.9778516697083769,
+      "support": 720.0
+    }
+  },
+  "checkpoint_full_model": "C:/Users/John joseph peter/Desktop/NUS/ApneaSense/ApneaSense\\artifacts\\joint_xyo\\checkpoints\\joint_best_joint_mlp_xyo_RGB.pth",
+  "checkpoint_encoder": "C:/Users/John joseph peter/Desktop/NUS/ApneaSense/ApneaSense\\artifacts\\joint_xyo\\checkpoints\\joint_encoder_xyo_RGB.pth",
+  "config": {
+    "dataset_root": "C:/Users/John joseph peter/Desktop/NUS/ApneaSense/SLP2022/SLP/danaLab",
+    "csv_path": "C:/Users/John joseph peter/Desktop/NUS/ApneaSense/SLP2022/SLP/danaLab/posture_labels_all_modalities.csv",
+    "project_root": "C:/Users/John joseph peter/Desktop/NUS/ApneaSense/ApneaSense",
+    "joint_source": "RGB",
+    "batch_size": 64,
+    "num_epochs": 20,
+    "lr": 0.001,
+    "weight_decay": 0.0001,
+    "dropout": 0.3,
+    "hidden_dim1": 128,
+    "hidden_dim2": 128,
+    "num_workers": 0,
+    "seed": 42,
+    "device": "cuda",
+    "train_ratio": 0.7,
+    "val_ratio": 0.15,
+    "test_ratio": 0.15,
+    "img_w": 576.0,
+    "img_h": 1024.0
+  },
+  "num_train_samples": 3195,
+  "num_val_samples": 675,
+  "num_test_samples": 720
+}
