@@ -2,4 +2,4 @@
 __pycache__/
 # Jupyter notebook checkpoints
 .ipynb_checkpoints/
-artifacts/depth_encoder_cnn/best_depth_model.pth 
+best_depth_model.pth 
