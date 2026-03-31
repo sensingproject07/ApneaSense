@@ -1,0 +1,19 @@
+{
+  "model_name": "AttentionFusionClassifier",
+  "modalities": [
+    "RGB",
+    "Depth",
+    "Joint"
+  ],
+  "encoders_frozen": true,
+  "fusion_type": "self_attention",
+  "num_heads": 4,
+  "common_feature_dim": 256,
+  "num_classes": 3,
+  "labels": {
+    "0": "supine",
+    "1": "left",
+    "2": "right"
+  },
+  "notes": "Frozen RGB, Depth, and Joint encoders with attention-based fusion head."
+}
