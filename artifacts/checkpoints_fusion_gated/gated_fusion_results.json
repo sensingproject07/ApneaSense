@@ -1,0 +1,49 @@
+{
+    "experiment": "gated_fusion",
+    "timestamp": "2026-03-31 08:31:50",
+    "config": {
+        "batch_size": 32,
+        "learning_rate": 0.001,
+        "num_epochs": 15,
+        "common_feature_dim": 256,
+        "dropout": 0.3
+    },
+    "metrics": {
+        "test_accuracy": 0.9898148148148148,
+        "test_macro_f1": 0.9898179684754501,
+        "confusion_matrix": [
+            [
+                709,
+                9,
+                2
+            ],
+            [
+                4,
+                716,
+                0
+            ],
+            [
+                7,
+                0,
+                713
+            ]
+        ]
+    },
+    "condition_metrics": {
+        "uncover": {
+            "accuracy": 0.9930555555555556,
+            "macro_f1": 0.9930612943165245
+        },
+        "cover1": {
+            "accuracy": 0.9902777777777778,
+            "macro_f1": 0.9902748060303134
+        },
+        "cover2": {
+            "accuracy": 0.9861111111111112,
+            "macro_f1": 0.9861167776832546
+        }
+    },
+    "paths": {
+        "model_checkpoint": "C:\\Users\\arshi\\Desktop\\AIS\\Sem-2\\Intelligent Sensing Systems\\Practise Module\\Project\\ApneaSense\\artifacts\\checkpoints_fusion_gated\\best_gated_fusion_model.pth"
+    }
+}
