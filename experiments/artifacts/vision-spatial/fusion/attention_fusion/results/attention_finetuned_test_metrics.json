@@ -1,0 +1,59 @@
+{
+  "experiment_name": "joint_attention_fusion_finetuned",
+  "best_epoch": 1,
+  "best_val_macro_f1": 1.0,
+  "test_loss": 0.010324819872389694,
+  "test_accuracy": 0.9962962962962963,
+  "test_macro_f1": 0.9963013691602929,
+  "classwise_metrics": {
+    "supine": {
+      "precision": 0.989010989010989,
+      "recall": 1.0,
+      "f1-score": 0.994475138121547,
+      "support": 720.0
+    },
+    "left": {
+      "precision": 1.0,
+      "recall": 0.9944444444444445,
+      "f1-score": 0.9972144846796658,
+      "support": 720.0
+    },
+    "right": {
+      "precision": 1.0,
+      "recall": 0.9944444444444445,
+      "f1-score": 0.9972144846796658,
+      "support": 720.0
+    },
+    "accuracy": 0.9962962962962963,
+    "macro avg": {
+      "precision": 0.9963369963369964,
+      "recall": 0.9962962962962963,
+      "f1-score": 0.9963013691602929,
+      "support": 2160.0
+    },
+    "weighted avg": {
+      "precision": 0.9963369963369964,
+      "recall": 0.9962962962962963,
+      "f1-score": 0.9963013691602928,
+      "support": 2160.0
+    }
+  },
+  "checkpoint_path": "C:\\Users\\John joseph peter\\Desktop\\NUS\\ApneaSense\\ApneaSense\\artifacts\\checkpoints_fusion_gated\\best_attention_fusion_finetuned.pth",
+  "config": {
+    "fusion_head_lr": 0.001,
+    "encoder_lr": 0.0001,
+    "finetune_epochs": 10,
+    "common_feature_dim": 256,
+    "num_classes": 3,
+    "class_names": [
+      "supine",
+      "left",
+      "right"
+    ],
+    "depth_feature_dim": 512,
+    "rgb_feature_dim": 128,
+    "joint_feature_dim": 128,
+    "joint_input_dim": 42,
+    "joint_encoder_frozen": true
+  }
+}
