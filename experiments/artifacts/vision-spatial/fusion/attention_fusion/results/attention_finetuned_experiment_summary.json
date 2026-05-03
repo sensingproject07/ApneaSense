@@ -1,0 +1,16 @@
+{
+  "model_name": "AttentionFusionClassifier",
+  "stage": "end_to_end_finetune",
+  "modalities": [
+    "RGB",
+    "Depth",
+    "Joint"
+  ],
+  "fusion_type": "self_attention",
+  "encoder_unfreeze_policy": {
+    "rgb": "layer4 unfrozen",
+    "depth": "last 2 encoder modules unfrozen",
+    "joint": "kept frozen"
+  },
+  "notes": "Stage-2 fine-tuning after selecting attention fusion as the best frozen-encoder benchmark head."
+}
