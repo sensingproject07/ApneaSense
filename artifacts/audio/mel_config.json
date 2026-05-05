@@ -1,0 +1,25 @@
+{
+  "_description": "Inference-time audio preprocessing for the mel_cnn binary apnea detector. These values must match what the model was trained on; changing any of them invalidates the checkpoint.",
+  "sample_rate": 16000,
+  "duration_seconds": 10,
+  "samples_per_segment": 160000,
+  "mel_spectrogram": {
+    "n_mels": 128,
+    "n_fft": 1024,
+    "hop_length": 512,
+    "f_min": 20,
+    "f_max": 8000
+  },
+  "db_normalization": {
+    "_description": "Power spectrogram is converted to dB with a fixed reference (1e-10 power floor), clamped to [db_floor, db_ceil], then linearly mapped to [0, 1]. This preserves cross-segment loudness, which is discriminative for apnea.",
+    "db_floor": -100.0,
+    "db_ceil": 0.0,
+    "power_floor": 1.0e-10
+  },
+  "input_tensor_shape": {
+    "_description": "Shape that goes into the model: (batch, channels=1, n_mels=128, time_frames=313). 313 = ceil(160000 / 512) + 1 from torchaudio MelSpectrogram.",
+    "channels": 1,
+    "n_mels": 128,
+    "time_frames": 313
+  }
+}

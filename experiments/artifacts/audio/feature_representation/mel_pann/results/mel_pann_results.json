@@ -1,0 +1,64 @@
+{
+  "experiment": "mel_pann",
+  "feature": "mel_spectrogram (PANN internal)",
+  "model": "PANN Cnn14 (AudioSet-pretrained)",
+  "best_epoch": 1,
+  "best_val_acc": 0.7884226150317096,
+  "best_val_macro_f1": 0.7752057735764846,
+  "test_loss": 0.12396398186683655,
+  "test_loss_unweighted": 0.5423250198364258,
+  "test_accuracy": 0.7692950217173404,
+  "test_macro_f1": 0.7534910335918028,
+  "classification_report": {
+    "non-apnea": {
+      "precision": 0.6592328278322926,
+      "recall": 0.7215622457282344,
+      "f1-score": 0.6889907544091368,
+      "support": 6145.0
+    },
+    "apnea": {
+      "precision": 0.8476673789173789,
+      "recall": 0.8059764666045882,
+      "f1-score": 0.8262963766543718,
+      "support": 11813.0
+    },
+    "accuracy": 0.7770909900879831,
+    "macro avg": {
+      "precision": 0.7534501033748358,
+      "recall": 0.7637693561664113,
+      "f1-score": 0.7576435655317544,
+      "support": 17958.0
+    },
+    "weighted avg": {
+      "precision": 0.7831874637587947,
+      "recall": 0.7770909900879831,
+      "f1-score": 0.7793121329358637,
+      "support": 17958.0
+    }
+  },
+  "config": {
+    "source_sample_rate": 16000,
+    "pann_sample_rate": 32000,
+    "pann_window_size": 1024,
+    "pann_hop_size": 320,
+    "pann_mel_bins": 64,
+    "pann_fmin": 50,
+    "pann_fmax": 14000,
+    "batch_size": 32,
+    "num_epochs": 10,
+    "learning_rate": 5e-05,
+    "weight_decay": 0.001,
+    "dropout": 0.5,
+    "loss": {
+      "type": "focal",
+      "gamma": 2.0,
+      "alpha": [
+        1.3111549615859985,
+        0.8082025051116943
+      ]
+    },
+    "num_train": 70430,
+    "num_val": 14822,
+    "num_test": 17958
+  }
+}

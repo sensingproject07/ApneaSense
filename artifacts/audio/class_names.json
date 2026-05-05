@@ -1,0 +1,8 @@
+{
+  "_description": "Binary apnea-detection label map. The model's logits[:, 0] is non-apnea, logits[:, 1] is apnea.",
+  "num_classes": 2,
+  "classes": {
+    "0": "non-apnea",
+    "1": "apnea"
+  }
+}

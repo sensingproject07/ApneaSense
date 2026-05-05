@@ -1,0 +1,70 @@
+{
+  "experiment": "mel_cnn",
+  "feature": "mel_spectrogram",
+  "model": "ResNet18",
+  "best_epoch": 7,
+  "best_val_acc": 0.8057617055727972,
+  "best_val_macro_f1": 0.7932296481668408,
+  "test_loss": 0.1695345789194107,
+  "test_loss_unweighted": 0.4558179974555969,
+  "test_accuracy": 0.8037643390132532,
+  "test_macro_f1": 0.7766004116393164,
+  "classification_report": {
+    "non-apnea": {
+      "precision": 0.7360835885426049,
+      "recall": 0.6649308380797396,
+      "f1-score": 0.6987004103967168,
+      "support": 6145.0
+    },
+    "apnea": {
+      "precision": 0.8340452970097526,
+      "recall": 0.8759840853297215,
+      "f1-score": 0.8545004128819158,
+      "support": 11813.0
+    },
+    "accuracy": 0.8037643390132532,
+    "macro avg": {
+      "precision": 0.7850644427761788,
+      "recall": 0.7704574617047306,
+      "f1-score": 0.7766004116393164,
+      "support": 17958.0
+    },
+    "weighted avg": {
+      "precision": 0.800524041940668,
+      "recall": 0.8037643390132532,
+      "f1-score": 0.8011876266433844,
+      "support": 17958.0
+    }
+  },
+  "config": {
+    "sample_rate": 16000,
+    "n_mels": 128,
+    "n_fft": 1024,
+    "hop_length": 512,
+    "f_min": 20,
+    "f_max": 8000,
+    "db_floor": -100.0,
+    "db_ceil": 0.0,
+    "batch_size": 128,
+    "num_epochs": 15,
+    "learning_rate": 0.0001,
+    "weight_decay": 0.001,
+    "dropout": 0.6,
+    "loss": {
+      "type": "focal",
+      "gamma": 2.0,
+      "alpha": [
+        1.3111549615859985,
+        0.8082025051116943
+      ]
+    },
+    "spec_aug": {
+      "freq": 32,
+      "time": 40,
+      "n_masks": 2
+    },
+    "num_train": 70430,
+    "num_val": 14822,
+    "num_test": 17958
+  }
+}

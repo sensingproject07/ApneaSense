@@ -1,0 +1,9 @@
+{
+  "_description": "Posture classification label map. Output logits[:, 0] = supine, [:, 1] = left, [:, 2] = right.",
+  "num_classes": 3,
+  "classes": {
+    "0": "supine",
+    "1": "left",
+    "2": "right"
+  }
+}

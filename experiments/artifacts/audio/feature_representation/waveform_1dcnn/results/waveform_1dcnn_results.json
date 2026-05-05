@@ -1,0 +1,59 @@
+{
+  "experiment": "waveform_1dcnn",
+  "feature": "raw_waveform",
+  "model": "RawWaveform1DCNN (from scratch)",
+  "best_epoch": 13,
+  "best_val_acc": 0.685669950074214,
+  "best_val_macro_f1": 0.6597219554138513,
+  "test_loss": 0.16149941086769104,
+  "test_loss_unweighted": 0.6613265872001648,
+  "test_accuracy": 0.6661654972714111,
+  "test_macro_f1": 0.6288374117037839,
+  "classification_report": {
+    "non-apnea": {
+      "precision": 0.5122269318552332,
+      "recall": 0.5113100081366965,
+      "f1-score": 0.5117680592882157,
+      "support": 6145.0
+    },
+    "apnea": {
+      "precision": 0.7460250338294994,
+      "recall": 0.746719715567595,
+      "f1-score": 0.7463722130558024,
+      "support": 11813.0
+    },
+    "accuracy": 0.6661654972714111,
+    "macro avg": {
+      "precision": 0.6291259828423663,
+      "recall": 0.6290148618521457,
+      "f1-score": 0.629070136172009,
+      "support": 17958.0
+    },
+    "weighted avg": {
+      "precision": 0.6660222864950598,
+      "recall": 0.6661654972714111,
+      "f1-score": 0.6660936450136028,
+      "support": 17958.0
+    }
+  },
+  "config": {
+    "sample_rate": 16000,
+    "segment_len": 160000,
+    "batch_size": 32,
+    "num_epochs": 15,
+    "learning_rate": 0.0001,
+    "weight_decay": 0.001,
+    "dropout": 0.5,
+    "loss": {
+      "type": "focal",
+      "gamma": 2.0,
+      "alpha": [
+        1.3111549615859985,
+        0.8082025051116943
+      ]
+    },
+    "num_train": 70430,
+    "num_val": 14822,
+    "num_test": 17958
+  }
+}

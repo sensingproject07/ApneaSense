@@ -1,5 +1,14 @@
 .venv/
 __pycache__/
+
 # Jupyter notebook checkpoints
 .ipynb_checkpoints/
-best_depth_model.pth 
+
+# Model weights — too large for git (GitHub 100 MB hard limit, 50 MB warning).
+# Production weights live in GitHub Releases (see model cards in artifacts/);
+# training-time checkpoints are reproducible from the source notebooks.
+*.pth
+*.pt
+
+# Claude Code local state
+.claude/
