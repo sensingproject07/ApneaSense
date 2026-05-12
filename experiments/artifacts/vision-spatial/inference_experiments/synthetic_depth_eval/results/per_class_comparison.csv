@@ -1,0 +1,4 @@
+class,support,precision_real,precision_synth,Δprecision,recall_real,recall_synth,Δrecall,f1_real,f1_synth,Δf1
+supine,720,0.9958,1.0,0.0042,0.9986,0.6431,-0.3556,0.9972,0.7828,-0.2145
+left,720,0.9986,0.9638,-0.0348,0.9958,0.9986,0.0028,0.9972,0.9809,-0.0163
+right,720,1.0,0.7571,-0.2429,1.0,1.0,0.0,1.0,0.8618,-0.1382

@@ -10,5 +10,11 @@ __pycache__/
 *.pth
 *.pt
 
+# Synthetic depth cache from inference experiments (thousands of PNGs)
+experiments/artifacts/vision-spatial/inference_experiments/synthetic_depth_eval/depth_synth_cache/
+
+# MediaPipe model binary (30 MB — download via synthetic_joints_eval.ipynb)
+*.task
+
 # Claude Code local state
 .claude/

@@ -1,0 +1,161 @@
+{
+  "experiment": "attention_fusion_synthetic_joints_eval",
+  "baseline_checkpoint": "models\\vision-spatial\\attention_fusion.pth",
+  "depth_source": "synthetic (Depth Anything v2 Small)",
+  "joint_estimator": "MediaPipe Pose (model_complexity=2, min_detection_confidence=0.3)",
+  "mediapipe_version": "0.10.35",
+  "test_samples": 2160,
+  "class_names": [
+    "supine",
+    "left",
+    "right"
+  ],
+  "detection_rate": {
+    "n_detected": 1984,
+    "n_total": 2160,
+    "fraction": 0.9185185185185185
+  },
+  "run_a_synth_depth_gt_joints": {
+    "accuracy": 0.8805555555555555,
+    "macro_f1": 0.8751385135344298,
+    "classification_report": {
+      "supine": {
+        "precision": 1.0,
+        "recall": 0.6430555555555556,
+        "f1-score": 0.7827557058326289,
+        "support": 720.0
+      },
+      "left": {
+        "precision": 0.9638069705093834,
+        "recall": 0.9986111111111111,
+        "f1-score": 0.9809004092769441,
+        "support": 720.0
+      },
+      "right": {
+        "precision": 0.7570977917981072,
+        "recall": 1.0,
+        "f1-score": 0.8617594254937163,
+        "support": 720.0
+      },
+      "accuracy": 0.8805555555555555,
+      "macro avg": {
+        "precision": 0.9069682541024969,
+        "recall": 0.8805555555555555,
+        "f1-score": 0.8751385135344298,
+        "support": 2160.0
+      },
+      "weighted avg": {
+        "precision": 0.9069682541024968,
+        "recall": 0.8805555555555555,
+        "f1-score": 0.8751385135344297,
+        "support": 2160.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        463,
+        27,
+        230
+      ],
+      [
+        0,
+        719,
+        1
+      ],
+      [
+        0,
+        0,
+        720
+      ]
+    ]
+  },
+  "run_b_synth_depth_est_joints": {
+    "accuracy": 0.8,
+    "macro_f1": 0.8019729697341935,
+    "classification_report": {
+      "supine": {
+        "precision": 1.0,
+        "recall": 0.7166666666666667,
+        "f1-score": 0.8349514563106796,
+        "support": 720.0
+      },
+      "left": {
+        "precision": 0.755608028335301,
+        "recall": 0.8888888888888888,
+        "f1-score": 0.816847479259732,
+        "support": 720.0
+      },
+      "right": {
+        "precision": 0.7176913425345044,
+        "recall": 0.7944444444444444,
+        "f1-score": 0.7541199736321688,
+        "support": 720.0
+      },
+      "accuracy": 0.8,
+      "macro avg": {
+        "precision": 0.8244331236232685,
+        "recall": 0.7999999999999999,
+        "f1-score": 0.8019729697341935,
+        "support": 2160.0
+      },
+      "weighted avg": {
+        "precision": 0.8244331236232685,
+        "recall": 0.8,
+        "f1-score": 0.8019729697341934,
+        "support": 2160.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        516,
+        59,
+        145
+      ],
+      [
+        0,
+        640,
+        80
+      ],
+      [
+        0,
+        148,
+        572
+      ]
+    ]
+  },
+  "joint_estimation_gap": {
+    "accuracy": -0.08055555555555549,
+    "macro_f1": -0.07316554380023632
+  },
+  "full_deployment_gap_vs_baseline_0998": {
+    "accuracy": -0.19809999999999994,
+    "macro_f1": -0.19612703026580647
+  },
+  "sample_breakdown": {
+    "both_correct": 1651,
+    "both_wrong": 181,
+    "regressed": 251,
+    "recovered": 77,
+    "agree_count": 1797,
+    "agree_fraction": 0.8319444444444445,
+    "regressed_no_detection": 87
+  },
+  "test_subjects": [
+    "00004",
+    "00005",
+    "00012",
+    "00014",
+    "00015",
+    "00018",
+    "00029",
+    "00032",
+    "00036",
+    "00055",
+    "00070",
+    "00076",
+    "00082",
+    "00087",
+    "00095",
+    "00100"
+  ]
+}
