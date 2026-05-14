@@ -10,11 +10,16 @@ from typing import Callable, Optional
 import numpy as np
 import torch
 
-from .config import AUDIO_MODEL_PATH, VISION_MODEL_PATH, WINDOW_DURATION
+from .config import (
+    AUDIO_MODEL_PATH,
+    VISION_MODEL_PATH,
+    CONSUMER_VISION_MODEL_PATH,
+    WINDOW_DURATION,
+)
 from .audio import extract_audio, segment_waveform, load_audio_model, run_audio_inference
 from .vision import (
     load_vision_model,
-    synthesize_depth, estimate_joints_mediapipe,
+    synthesize_depth, preprocess_synthetic_depth, estimate_joints_yolo,
     load_joints_from_mat, load_joints_from_csv,
     preprocess_rgb, preprocess_depth, preprocess_joints,
     run_frame_inference,
@@ -109,7 +114,7 @@ def consumer_pipeline(
 
     _log("Loading models...")
     audio_model  = load_audio_model(AUDIO_MODEL_PATH, device)
-    vision_model = load_vision_model(VISION_MODEL_PATH, device)
+    vision_model = load_vision_model(CONSUMER_VISION_MODEL_PATH, device)
 
     _log("Extracting audio from video...")
     waveform     = extract_audio(video_path)
@@ -123,14 +128,16 @@ def consumer_pipeline(
     frames, fps = _extract_frames(video_path)
     _log(f"  {len(frames)} frames at {fps:.1f} fps")
 
-    _log("Running vision inference (synthetic depth + MediaPipe joints)...")
+    yolo_device = 0 if device.type == "cuda" else "cpu"
+    _log("Running vision inference (synthetic depth + YOLO joints)...")
     frame_results = []
     for frame in frames:
         i = frame["frame_idx"]
         if i % 30 == 0:
             _log(f"  Frame {i + 1}/{len(frames)}")
+        joint_vec = estimate_joints_yolo(frame["image"], device=yolo_device)
         depth_pil = synthesize_depth(frame["image"], device)
-        joint_vec = estimate_joints_mediapipe(frame["image"])
+        depth_pil = preprocess_synthetic_depth(depth_pil, joint_vec)
         result    = run_frame_inference(
             vision_model,
             preprocess_depth(depth_pil),

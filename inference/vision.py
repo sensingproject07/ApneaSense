@@ -6,15 +6,29 @@ from pathlib import Path
 from typing import Optional
 
 import numpy as np
-import streamlit as st
 import torch
 import torch.nn.functional as F
 import torchvision.transforms as T
 from PIL import Image
 
+try:
+    import streamlit as st
+except ImportError:
+    class _StreamlitFallback:
+        @staticmethod
+        def cache_resource(func=None, **_kwargs):
+            if func is None:
+                return lambda wrapped: wrapped
+            return func
+
+    st = _StreamlitFallback()
+
 from .config import (
     IMG_W, IMG_H, VISION_INPUT_SIZE, VISION_CLASS_NAMES,
     VISION_MODEL_PATH, MEDIAPIPE_MODEL_PATH,
+    YOLO_POSE_MODEL_PATH, YOLO_CONF_THRESHOLD,
+    CONSUMER_DEPTH_PREPROCESS, CONSUMER_BODY_PADDING,
+    CONSUMER_DEPTH_NORM_PERCENTILES,
 )
 from .models import DepthEncoder, RGBEncoder, JointEncoder, AttentionFusionClassifier
 
@@ -74,6 +88,83 @@ def synthesize_depth(rgb_pil: Image.Image, device, target_size=(424, 512)) -> Im
     ).squeeze().cpu().numpy()
     p_min, p_max = pred.min(), pred.max()
     norm = (pred - p_min) / (p_max - p_min) if p_max > p_min else np.zeros_like(pred)
+    return Image.fromarray((norm * 255).astype(np.uint8), mode="L")
+
+
+def joint_vector_to_bbox(
+    joint_vec: np.ndarray,
+    image_size: tuple[int, int],
+    padding: float = 0.15,
+) -> Optional[tuple[int, int, int, int]]:
+    joints = np.asarray(joint_vec, dtype=np.float32).reshape(14, 3)
+    xs = joints[:, 0]
+    ys = joints[:, 1]
+    occ = joints[:, 2]
+    valid = (xs > 0) & (ys > 0) & (xs <= 1.5) & (ys <= 1.5) & (occ < 1.0)
+    if valid.sum() < 3:
+        valid = (xs > 0) & (ys > 0) & (xs <= 1.5) & (ys <= 1.5)
+    if valid.sum() < 3:
+        return None
+
+    width, height = image_size
+    x_px = xs[valid] * width
+    y_px = ys[valid] * height
+    x0, x1 = float(x_px.min()), float(x_px.max())
+    y0, y1 = float(y_px.min()), float(y_px.max())
+    box_w = max(1.0, x1 - x0)
+    box_h = max(1.0, y1 - y0)
+    pad_x = box_w * padding
+    pad_y = box_h * padding
+    left = max(0, int(np.floor(x0 - pad_x)))
+    top = max(0, int(np.floor(y0 - pad_y)))
+    right = min(width, int(np.ceil(x1 + pad_x)))
+    bottom = min(height, int(np.ceil(y1 + pad_y)))
+    if right <= left or bottom <= top:
+        return None
+    return left, top, right, bottom
+
+
+def preprocess_synthetic_depth(
+    depth_pil: Image.Image,
+    joint_vec: np.ndarray,
+    mode: str = CONSUMER_DEPTH_PREPROCESS,
+    body_padding: float = CONSUMER_BODY_PADDING,
+    norm_percentiles: tuple[float, float] = CONSUMER_DEPTH_NORM_PERCENTILES,
+) -> Image.Image:
+    """
+    Consumer synthetic-depth postprocess used by the fine-tuned checkpoint.
+    """
+    if mode == "none":
+        return depth_pil
+
+    arr = np.asarray(depth_pil.convert("L"), dtype=np.float32) / 255.0
+    if mode == "invert":
+        return Image.fromarray(((1.0 - arr) * 255).astype(np.uint8), mode="L")
+
+    if mode not in {"body-norm", "body-norm-bg-zero", "body-norm-invert"}:
+        raise ValueError(f"Unsupported synthetic-depth preprocess mode: {mode}")
+
+    bbox = joint_vector_to_bbox(joint_vec, depth_pil.size, padding=body_padding)
+    if bbox is None:
+        ref = arr
+        mask = np.ones_like(arr, dtype=bool)
+    else:
+        left, top, right, bottom = bbox
+        mask = np.zeros_like(arr, dtype=bool)
+        mask[top:bottom, left:right] = True
+        ref = arr[mask]
+
+    lo, hi = np.percentile(ref, norm_percentiles)
+    if hi <= lo:
+        norm = np.zeros_like(arr)
+    else:
+        norm = np.clip((arr - lo) / (hi - lo), 0.0, 1.0)
+
+    if mode == "body-norm-bg-zero" and bbox is not None:
+        norm = np.where(mask, norm, 0.0)
+    elif mode == "body-norm-invert":
+        norm = 1.0 - norm
+
     return Image.fromarray((norm * 255).astype(np.uint8), mode="L")
 
 
@@ -144,6 +235,128 @@ def estimate_joints_mediapipe(rgb_pil: Image.Image, model_path=None) -> np.ndarr
 
 
 # ── GT joint loading (clinical mode) ──────────────────────────────────────────
+
+# --- YOLO joint estimation (consumer mode) ---
+_yolo_cache = {}
+
+# SLP-14 order:
+# 0 R ankle, 1 R knee, 2 R hip, 3 L hip, 4 L knee, 5 L ankle,
+# 6 R wrist, 7 R elbow, 8 R shoulder, 9 L shoulder, 10 L elbow,
+# 11 L wrist, 12 neck/thorax, 13 head.
+_COCO17_TO_SLP14 = {
+    0: 16,
+    1: 14,
+    2: 12,
+    3: 11,
+    4: 13,
+    5: 15,
+    6: 10,
+    7: 8,
+    8: 6,
+    9: 5,
+    10: 7,
+    11: 9,
+}
+
+
+def _get_yolo_pose(model_path=None):
+    path = str(model_path or YOLO_POSE_MODEL_PATH)
+    if path not in _yolo_cache:
+        from ultralytics import YOLO
+        _yolo_cache[path] = YOLO(path)
+    return _yolo_cache[path]
+
+
+def _select_best_yolo_pose(result) -> Optional[int]:
+    keypoints = getattr(result, "keypoints", None)
+    boxes = getattr(result, "boxes", None)
+    if keypoints is None or keypoints.xy is None or len(keypoints.xy) == 0:
+        return None
+    if boxes is not None and boxes.conf is not None and len(boxes.conf) == len(keypoints.xy):
+        return int(torch.argmax(boxes.conf).item())
+    return 0
+
+
+def _slp_joints_to_vector(joints_3x14: np.ndarray) -> np.ndarray:
+    x = joints_3x14[0].astype(np.float32)
+    y = joints_3x14[1].astype(np.float32)
+    occ = joints_3x14[2].astype(np.float32)
+    return np.stack([x, y, occ], axis=1).reshape(-1)
+
+
+def yolo_result_to_slp_vector(
+    result,
+    image_size: tuple[int, int],
+    conf_threshold: float = YOLO_CONF_THRESHOLD,
+) -> tuple[np.ndarray, bool]:
+    """
+    Convert one Ultralytics pose result into the fusion model's 42-D joint vector.
+    Coordinates are normalized to the input frame size.
+    """
+    pose_idx = _select_best_yolo_pose(result)
+    if pose_idx is None:
+        return np.zeros(42, dtype=np.float32), False
+
+    width, height = image_size
+    xy = result.keypoints.xy[pose_idx].detach().cpu().numpy()
+    conf = None
+    if getattr(result.keypoints, "conf", None) is not None:
+        conf = result.keypoints.conf[pose_idx].detach().cpu().numpy()
+
+    joints = np.zeros((3, 14), dtype=np.float32)
+    if xy.shape[0] < 17:
+        return np.zeros(42, dtype=np.float32), False
+
+    for slp_idx, coco_idx in _COCO17_TO_SLP14.items():
+        x_px, y_px = xy[coco_idx]
+        score = float(conf[coco_idx]) if conf is not None else 1.0
+        if x_px > 0 and y_px > 0:
+            joints[0, slp_idx] = x_px / width
+            joints[1, slp_idx] = y_px / height
+        joints[2, slp_idx] = 0.0 if score >= conf_threshold else 1.0
+
+    left_shoulder = xy[5]
+    right_shoulder = xy[6]
+    if np.all(left_shoulder > 0) and np.all(right_shoulder > 0):
+        joints[0, 12] = (left_shoulder[0] + right_shoulder[0]) / 2 / width
+        joints[1, 12] = (left_shoulder[1] + right_shoulder[1]) / 2 / height
+    shoulder_conf = 1.0
+    if conf is not None:
+        shoulder_conf = min(float(conf[5]), float(conf[6]))
+    joints[2, 12] = 0.0 if shoulder_conf >= conf_threshold else 1.0
+
+    nose_conf = float(conf[0]) if conf is not None else 1.0
+    if xy[0, 0] > 0 and xy[0, 1] > 0:
+        joints[0, 13] = xy[0, 0] / width
+        joints[1, 13] = xy[0, 1] / height
+    joints[2, 13] = 0.0 if nose_conf >= conf_threshold else 1.0
+
+    detected = bool(np.count_nonzero(joints[:2]) > 0)
+    return _slp_joints_to_vector(joints), detected
+
+
+def estimate_joints_yolo(
+    rgb_pil: Image.Image,
+    model_path=None,
+    conf_threshold: float = YOLO_CONF_THRESHOLD,
+    device=None,
+) -> np.ndarray:
+    """
+    Run YOLO pose on a PIL RGB image.
+    Returns a (42,) float32 vector in normalized SLP-14 order.
+    """
+    pose_model = _get_yolo_pose(model_path)
+    result = pose_model.predict(
+        source=np.array(rgb_pil),
+        conf=conf_threshold,
+        verbose=False,
+        device=device,
+    )[0]
+    joint_vec, _ = yolo_result_to_slp_vector(result, rgb_pil.size, conf_threshold)
+    return joint_vec
+
+
+# --- GT joint loading (clinical mode) ---
 
 def load_joints_from_mat(mat_path, frame_idx: int) -> np.ndarray:
     """

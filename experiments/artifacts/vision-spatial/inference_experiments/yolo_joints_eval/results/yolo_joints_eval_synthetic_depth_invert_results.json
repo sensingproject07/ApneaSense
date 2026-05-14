@@ -1,0 +1,163 @@
+{
+  "experiment": "attention_fusion_yolo_joints_eval",
+  "baseline_checkpoint": "C:\\Users\\John joseph peter\\Desktop\\NUS\\ApneaSense\\ApneaSense\\experiments\\artifacts\\vision-spatial\\fusion\\attention_fusion\\checkpoints\\best_attention_fusion.pth",
+  "depth_metadata": {
+    "depth_source": "synthetic",
+    "model_name": "depth-anything/Depth-Anything-V2-Small-hf",
+    "cache_root": "C:\\Users\\John joseph peter\\Desktop\\NUS\\ApneaSense\\ApneaSense\\experiments\\artifacts\\vision-spatial\\inference_experiments\\synthetic_depth_eval\\depth_synth_cache",
+    "generated": 0,
+    "reused": 2160,
+    "depth_preprocess": "invert"
+  },
+  "yolo_model": "C:\\Users\\John joseph peter\\Desktop\\NUS\\ApneaSense\\yolov8n-pose.pt",
+  "yolo_metadata": {
+    "model_path": "C:\\Users\\John joseph peter\\Desktop\\NUS\\ApneaSense\\yolov8n-pose.pt",
+    "conf_threshold": 0.2,
+    "keypoint_shape_example": [
+      1,
+      17,
+      2
+    ]
+  },
+  "test_samples": 2160,
+  "test_subjects": [
+    "00100",
+    "00005",
+    "00055",
+    "00076",
+    "00012",
+    "00070",
+    "00087",
+    "00014",
+    "00018",
+    "00029",
+    "00032",
+    "00036",
+    "00095",
+    "00004",
+    "00015",
+    "00082"
+  ],
+  "class_names": [
+    "supine",
+    "left",
+    "right"
+  ],
+  "detection_rate": {
+    "n_detected": 2155,
+    "n_total": 2160,
+    "fraction": 0.9976851851851852
+  },
+  "synthetic_depth_gt_joints": {
+    "accuracy": 0.9203703703703704,
+    "macro_f1": 0.9184181285331855,
+    "classification_report": {
+      "supine": {
+        "precision": 1.0,
+        "recall": 0.7652777777777777,
+        "f1-score": 0.8670338316286389,
+        "support": 720.0
+      },
+      "left": {
+        "precision": 0.9663072776280324,
+        "recall": 0.9958333333333333,
+        "f1-score": 0.9808481532147743,
+        "support": 720.0
+      },
+      "right": {
+        "precision": 0.8304498269896193,
+        "recall": 1.0,
+        "f1-score": 0.9073724007561437,
+        "support": 720.0
+      },
+      "accuracy": 0.9203703703703704,
+      "macro avg": {
+        "precision": 0.932252368205884,
+        "recall": 0.9203703703703704,
+        "f1-score": 0.9184181285331855,
+        "support": 2160.0
+      },
+      "weighted avg": {
+        "precision": 0.932252368205884,
+        "recall": 0.9203703703703704,
+        "f1-score": 0.9184181285331856,
+        "support": 2160.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        551,
+        25,
+        144
+      ],
+      [
+        0,
+        717,
+        3
+      ],
+      [
+        0,
+        0,
+        720
+      ]
+    ]
+  },
+  "synthetic_depth_yolo_joints": {
+    "accuracy": 0.8560185185185185,
+    "macro_f1": 0.8555932866630945,
+    "classification_report": {
+      "supine": {
+        "precision": 0.9981515711645101,
+        "recall": 0.75,
+        "f1-score": 0.8564631245043616,
+        "support": 720.0
+      },
+      "left": {
+        "precision": 0.7829977628635347,
+        "recall": 0.9722222222222222,
+        "f1-score": 0.8674101610904585,
+        "support": 720.0
+      },
+      "right": {
+        "precision": 0.84,
+        "recall": 0.8458333333333333,
+        "f1-score": 0.8429065743944637,
+        "support": 720.0
+      },
+      "accuracy": 0.8560185185185185,
+      "macro avg": {
+        "precision": 0.873716444676015,
+        "recall": 0.8560185185185185,
+        "f1-score": 0.8555932866630945,
+        "support": 2160.0
+      },
+      "weighted avg": {
+        "precision": 0.873716444676015,
+        "recall": 0.8560185185185185,
+        "f1-score": 0.8555932866630946,
+        "support": 2160.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        540,
+        84,
+        96
+      ],
+      [
+        0,
+        700,
+        20
+      ],
+      [
+        1,
+        110,
+        609
+      ]
+    ]
+  },
+  "joint_estimation_gap": {
+    "accuracy": -0.06435185185185188,
+    "macro_f1": -0.06282484187009096
+  }
+}

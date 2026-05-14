@@ -59,3 +59,32 @@ Each contributor is responsible for installing the PyTorch version appropriate f
 
 Please use the official PyTorch installation selector to get the correct command for your machine:  
 `https://pytorch.org/get-started/locally/`
+
+## Inference Modes
+
+ApneaSense keeps the clinical and consumer posture paths separate while sharing
+the same attention-fusion model architecture.
+
+### Clinical mode
+
+Clinical mode is the stable reference path. It expects RGB video, real depth,
+and real joint annotations, then loads the clinical vision checkpoint:
+
+`inference.config.VISION_MODEL_PATH`
+
+### Consumer mode
+
+Consumer mode is for RGB-only video. It prepares deployment-style vision inputs:
+
+1. Estimate SLP-14 body joints with YOLO pose.
+2. Generate monocular synthetic depth with Depth Anything V2.
+3. Apply body-normalized inverted synthetic-depth preprocessing using 2/98
+   percentile normalization.
+4. Load the consumer fine-tuned attention-fusion checkpoint:
+
+`inference.config.CONSUMER_VISION_MODEL_PATH`
+
+The consumer checkpoint was fine-tuned from the clinical attention-fusion model
+with the encoders frozen and only the fusion/head layers adapted. In the held-out
+SLP evaluation, consumer-style inputs improved from `0.9029` macro F1 before
+fine-tuning to `0.9847` macro F1 after fine-tuning.

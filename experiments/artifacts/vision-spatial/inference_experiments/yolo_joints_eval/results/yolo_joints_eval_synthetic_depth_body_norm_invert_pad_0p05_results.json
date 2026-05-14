@@ -1,0 +1,164 @@
+{
+  "experiment": "attention_fusion_yolo_joints_eval",
+  "baseline_checkpoint": "C:\\Users\\John joseph peter\\Desktop\\NUS\\ApneaSense\\ApneaSense\\experiments\\artifacts\\vision-spatial\\fusion\\attention_fusion\\checkpoints\\best_attention_fusion.pth",
+  "depth_metadata": {
+    "depth_source": "synthetic",
+    "model_name": "depth-anything/Depth-Anything-V2-Small-hf",
+    "cache_root": "C:\\Users\\John joseph peter\\Desktop\\NUS\\ApneaSense\\ApneaSense\\experiments\\artifacts\\vision-spatial\\inference_experiments\\synthetic_depth_eval\\depth_synth_cache",
+    "generated": 0,
+    "reused": 2160,
+    "depth_preprocess": "body-norm-invert",
+    "body_padding": 0.05
+  },
+  "yolo_model": "C:\\Users\\John joseph peter\\Desktop\\NUS\\ApneaSense\\yolov8n-pose.pt",
+  "yolo_metadata": {
+    "model_path": "C:\\Users\\John joseph peter\\Desktop\\NUS\\ApneaSense\\yolov8n-pose.pt",
+    "conf_threshold": 0.2,
+    "keypoint_shape_example": [
+      1,
+      17,
+      2
+    ]
+  },
+  "test_samples": 2160,
+  "test_subjects": [
+    "00100",
+    "00005",
+    "00055",
+    "00076",
+    "00012",
+    "00070",
+    "00087",
+    "00014",
+    "00018",
+    "00029",
+    "00032",
+    "00036",
+    "00095",
+    "00004",
+    "00015",
+    "00082"
+  ],
+  "class_names": [
+    "supine",
+    "left",
+    "right"
+  ],
+  "detection_rate": {
+    "n_detected": 2155,
+    "n_total": 2160,
+    "fraction": 0.9976851851851852
+  },
+  "synthetic_depth_gt_joints": {
+    "accuracy": 0.9430555555555555,
+    "macro_f1": 0.9423617158773774,
+    "classification_report": {
+      "supine": {
+        "precision": 0.9967051070840197,
+        "recall": 0.8402777777777778,
+        "f1-score": 0.9118311981914092,
+        "support": 720.0
+      },
+      "left": {
+        "precision": 0.9740437158469946,
+        "recall": 0.9902777777777778,
+        "f1-score": 0.9820936639118457,
+        "support": 720.0
+      },
+      "right": {
+        "precision": 0.8757612667478685,
+        "recall": 0.9986111111111111,
+        "f1-score": 0.9331602855288773,
+        "support": 720.0
+      },
+      "accuracy": 0.9430555555555555,
+      "macro avg": {
+        "precision": 0.9488366965596277,
+        "recall": 0.9430555555555555,
+        "f1-score": 0.9423617158773774,
+        "support": 2160.0
+      },
+      "weighted avg": {
+        "precision": 0.9488366965596275,
+        "recall": 0.9430555555555555,
+        "f1-score": 0.9423617158773774,
+        "support": 2160.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        605,
+        19,
+        96
+      ],
+      [
+        1,
+        713,
+        6
+      ],
+      [
+        1,
+        0,
+        719
+      ]
+    ]
+  },
+  "synthetic_depth_yolo_joints": {
+    "accuracy": 0.9004629629629629,
+    "macro_f1": 0.9006369684773136,
+    "classification_report": {
+      "supine": {
+        "precision": 0.9917627677100495,
+        "recall": 0.8361111111111111,
+        "f1-score": 0.9073097211755841,
+        "support": 720.0
+      },
+      "left": {
+        "precision": 0.8743654822335025,
+        "recall": 0.9569444444444445,
+        "f1-score": 0.9137931034482759,
+        "support": 720.0
+      },
+      "right": {
+        "precision": 0.8549019607843137,
+        "recall": 0.9083333333333333,
+        "f1-score": 0.8808080808080808,
+        "support": 720.0
+      },
+      "accuracy": 0.9004629629629629,
+      "macro avg": {
+        "precision": 0.9070100702426219,
+        "recall": 0.9004629629629629,
+        "f1-score": 0.9006369684773136,
+        "support": 2160.0
+      },
+      "weighted avg": {
+        "precision": 0.9070100702426219,
+        "recall": 0.9004629629629629,
+        "f1-score": 0.9006369684773137,
+        "support": 2160.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        602,
+        34,
+        84
+      ],
+      [
+        4,
+        689,
+        27
+      ],
+      [
+        1,
+        65,
+        654
+      ]
+    ]
+  },
+  "joint_estimation_gap": {
+    "accuracy": -0.042592592592592626,
+    "macro_f1": -0.04172474740006382
+  }
+}

@@ -1,0 +1,164 @@
+{
+  "experiment": "attention_fusion_yolo_joints_eval",
+  "baseline_checkpoint": "C:\\Users\\John joseph peter\\Desktop\\NUS\\ApneaSense\\ApneaSense\\experiments\\artifacts\\vision-spatial\\fusion\\attention_fusion\\checkpoints\\best_attention_fusion.pth",
+  "depth_metadata": {
+    "depth_source": "synthetic",
+    "model_name": "depth-anything/Depth-Anything-V2-Small-hf",
+    "cache_root": "C:\\Users\\John joseph peter\\Desktop\\NUS\\ApneaSense\\ApneaSense\\experiments\\artifacts\\vision-spatial\\inference_experiments\\synthetic_depth_eval\\depth_synth_cache",
+    "generated": 0,
+    "reused": 2160,
+    "depth_preprocess": "body-norm-invert",
+    "body_padding": 0.4
+  },
+  "yolo_model": "C:\\Users\\John joseph peter\\Desktop\\NUS\\ApneaSense\\yolov8n-pose.pt",
+  "yolo_metadata": {
+    "model_path": "C:\\Users\\John joseph peter\\Desktop\\NUS\\ApneaSense\\yolov8n-pose.pt",
+    "conf_threshold": 0.2,
+    "keypoint_shape_example": [
+      1,
+      17,
+      2
+    ]
+  },
+  "test_samples": 2160,
+  "test_subjects": [
+    "00100",
+    "00005",
+    "00055",
+    "00076",
+    "00012",
+    "00070",
+    "00087",
+    "00014",
+    "00018",
+    "00029",
+    "00032",
+    "00036",
+    "00095",
+    "00004",
+    "00015",
+    "00082"
+  ],
+  "class_names": [
+    "supine",
+    "left",
+    "right"
+  ],
+  "detection_rate": {
+    "n_detected": 2155,
+    "n_total": 2160,
+    "fraction": 0.9976851851851852
+  },
+  "synthetic_depth_gt_joints": {
+    "accuracy": 0.9162037037037037,
+    "macro_f1": 0.9141643786182144,
+    "classification_report": {
+      "supine": {
+        "precision": 1.0,
+        "recall": 0.7527777777777778,
+        "f1-score": 0.8589540412044374,
+        "support": 720.0
+      },
+      "left": {
+        "precision": 0.9715447154471545,
+        "recall": 0.9958333333333333,
+        "f1-score": 0.9835390946502057,
+        "support": 720.0
+      },
+      "right": {
+        "precision": 0.8181818181818182,
+        "recall": 1.0,
+        "f1-score": 0.9,
+        "support": 720.0
+      },
+      "accuracy": 0.9162037037037037,
+      "macro avg": {
+        "precision": 0.9299088445429909,
+        "recall": 0.9162037037037036,
+        "f1-score": 0.9141643786182144,
+        "support": 2160.0
+      },
+      "weighted avg": {
+        "precision": 0.9299088445429908,
+        "recall": 0.9162037037037037,
+        "f1-score": 0.9141643786182144,
+        "support": 2160.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        542,
+        21,
+        157
+      ],
+      [
+        0,
+        717,
+        3
+      ],
+      [
+        0,
+        0,
+        720
+      ]
+    ]
+  },
+  "synthetic_depth_yolo_joints": {
+    "accuracy": 0.8805555555555555,
+    "macro_f1": 0.8800885160843833,
+    "classification_report": {
+      "supine": {
+        "precision": 1.0,
+        "recall": 0.7763888888888889,
+        "f1-score": 0.874120406567631,
+        "support": 720.0
+      },
+      "left": {
+        "precision": 0.8594327990135635,
+        "recall": 0.9680555555555556,
+        "f1-score": 0.9105160026126714,
+        "support": 720.0
+      },
+      "right": {
+        "precision": 0.8177215189873418,
+        "recall": 0.8972222222222223,
+        "f1-score": 0.8556291390728477,
+        "support": 720.0
+      },
+      "accuracy": 0.8805555555555555,
+      "macro avg": {
+        "precision": 0.8923847726669685,
+        "recall": 0.8805555555555555,
+        "f1-score": 0.8800885160843833,
+        "support": 2160.0
+      },
+      "weighted avg": {
+        "precision": 0.8923847726669684,
+        "recall": 0.8805555555555555,
+        "f1-score": 0.8800885160843834,
+        "support": 2160.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        559,
+        40,
+        121
+      ],
+      [
+        0,
+        697,
+        23
+      ],
+      [
+        0,
+        74,
+        646
+      ]
+    ]
+  },
+  "joint_estimation_gap": {
+    "accuracy": -0.03564814814814821,
+    "macro_f1": -0.0340758625338311
+  }
+}

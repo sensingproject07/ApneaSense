@@ -1,0 +1,4 @@
+class,support,f1_gt,f1_yolo,delta_f1,recall_gt,recall_yolo,delta_recall,precision_gt,precision_yolo,delta_precision
+supine,720.0,0.7919,0.8498,0.0579,0.6556,0.7389,0.0833,1.0,1.0,0.0
+left,720.0,0.9862,0.9159,-0.0703,0.9958,0.9611,-0.0347,0.9768,0.8748,-0.102
+right,720.0,0.8602,0.8362,-0.024,1.0,0.9042,-0.0958,0.7547,0.7778,0.0231

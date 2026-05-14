@@ -5,6 +5,13 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 # ── Model weights ──────────────────────────────────────────────────────────────
 AUDIO_MODEL_PATH  = PROJECT_ROOT / "models" / "audio" / "mel_cnn.pth"
 VISION_MODEL_PATH = PROJECT_ROOT / "models" / "vision-spatial" / "attention_fusion.pth"
+CONSUMER_VISION_MODEL_PATH = (
+    PROJECT_ROOT
+    / "experiments" / "artifacts" / "vision-spatial"
+    / "inference_experiments" / "consumer_finetune"
+    / "checkpoints" / "best_consumer_attention_fusion.pth"
+)
+YOLO_POSE_MODEL_PATH = PROJECT_ROOT.parent / "yolov8n-pose.pt"
 
 # ── Class names ────────────────────────────────────────────────────────────────
 AUDIO_CLASS_NAMES  = ["non-apnea", "apnea"]
@@ -44,3 +51,10 @@ MEDIAPIPE_MODEL_PATH = (
     / "inference_experiments" / "synthetic_joints_eval"
     / "pose_landmarker_heavy.task"
 )
+
+# Consumer posture preprocessing. These match the best synthetic-depth
+# experiment and the consumer fine-tune checkpoint.
+CONSUMER_DEPTH_PREPROCESS = "body-norm-invert"
+CONSUMER_BODY_PADDING = 0.0
+CONSUMER_DEPTH_NORM_PERCENTILES = (2.0, 98.0)
+YOLO_CONF_THRESHOLD = 0.2

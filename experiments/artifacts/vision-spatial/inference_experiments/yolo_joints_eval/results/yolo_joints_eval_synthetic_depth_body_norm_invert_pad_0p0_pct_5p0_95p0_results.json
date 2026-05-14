@@ -1,0 +1,168 @@
+{
+  "experiment": "attention_fusion_yolo_joints_eval",
+  "baseline_checkpoint": "C:\\Users\\John joseph peter\\Desktop\\NUS\\ApneaSense\\ApneaSense\\experiments\\artifacts\\vision-spatial\\fusion\\attention_fusion\\checkpoints\\best_attention_fusion.pth",
+  "depth_metadata": {
+    "depth_source": "synthetic",
+    "model_name": "depth-anything/Depth-Anything-V2-Small-hf",
+    "cache_root": "C:\\Users\\John joseph peter\\Desktop\\NUS\\ApneaSense\\ApneaSense\\experiments\\artifacts\\vision-spatial\\inference_experiments\\synthetic_depth_eval\\depth_synth_cache",
+    "generated": 0,
+    "reused": 2160,
+    "depth_preprocess": "body-norm-invert",
+    "body_padding": 0.0,
+    "norm_percentiles": [
+      5.0,
+      95.0
+    ]
+  },
+  "yolo_model": "C:\\Users\\John joseph peter\\Desktop\\NUS\\ApneaSense\\yolov8n-pose.pt",
+  "yolo_metadata": {
+    "model_path": "C:\\Users\\John joseph peter\\Desktop\\NUS\\ApneaSense\\yolov8n-pose.pt",
+    "conf_threshold": 0.2,
+    "keypoint_shape_example": [
+      1,
+      17,
+      2
+    ]
+  },
+  "test_samples": 2160,
+  "test_subjects": [
+    "00100",
+    "00005",
+    "00055",
+    "00076",
+    "00012",
+    "00070",
+    "00087",
+    "00014",
+    "00018",
+    "00029",
+    "00032",
+    "00036",
+    "00095",
+    "00004",
+    "00015",
+    "00082"
+  ],
+  "class_names": [
+    "supine",
+    "left",
+    "right"
+  ],
+  "detection_rate": {
+    "n_detected": 2155,
+    "n_total": 2160,
+    "fraction": 0.9976851851851852
+  },
+  "synthetic_depth_gt_joints": {
+    "accuracy": 0.9601851851851851,
+    "macro_f1": 0.9598870924398047,
+    "classification_report": {
+      "supine": {
+        "precision": 0.9984375,
+        "recall": 0.8875,
+        "f1-score": 0.9397058823529412,
+        "support": 720.0
+      },
+      "left": {
+        "precision": 0.9821673525377229,
+        "recall": 0.9944444444444445,
+        "f1-score": 0.9882677708764666,
+        "support": 720.0
+      },
+      "right": {
+        "precision": 0.9089759797724399,
+        "recall": 0.9986111111111111,
+        "f1-score": 0.9516876240900066,
+        "support": 720.0
+      },
+      "accuracy": 0.9601851851851851,
+      "macro avg": {
+        "precision": 0.9631936107700542,
+        "recall": 0.9601851851851851,
+        "f1-score": 0.9598870924398047,
+        "support": 2160.0
+      },
+      "weighted avg": {
+        "precision": 0.9631936107700544,
+        "recall": 0.9601851851851851,
+        "f1-score": 0.9598870924398049,
+        "support": 2160.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        639,
+        13,
+        68
+      ],
+      [
+        0,
+        716,
+        4
+      ],
+      [
+        1,
+        0,
+        719
+      ]
+    ]
+  },
+  "synthetic_depth_yolo_joints": {
+    "accuracy": 0.9018518518518519,
+    "macro_f1": 0.9020315017649411,
+    "classification_report": {
+      "supine": {
+        "precision": 0.9838969404186796,
+        "recall": 0.8486111111111111,
+        "f1-score": 0.9112602535421327,
+        "support": 720.0
+      },
+      "left": {
+        "precision": 0.8754764930114358,
+        "recall": 0.9569444444444445,
+        "f1-score": 0.9143994691439947,
+        "support": 720.0
+      },
+      "right": {
+        "precision": 0.8617021276595744,
+        "recall": 0.9,
+        "f1-score": 0.8804347826086957,
+        "support": 720.0
+      },
+      "accuracy": 0.9018518518518519,
+      "macro avg": {
+        "precision": 0.9070251870298968,
+        "recall": 0.9018518518518519,
+        "f1-score": 0.9020315017649411,
+        "support": 2160.0
+      },
+      "weighted avg": {
+        "precision": 0.9070251870298965,
+        "recall": 0.9018518518518519,
+        "f1-score": 0.9020315017649411,
+        "support": 2160.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        611,
+        28,
+        81
+      ],
+      [
+        8,
+        689,
+        23
+      ],
+      [
+        2,
+        70,
+        648
+      ]
+    ]
+  },
+  "joint_estimation_gap": {
+    "accuracy": -0.05833333333333324,
+    "macro_f1": -0.05785559067486368
+  }
+}

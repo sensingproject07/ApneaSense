@@ -8,3 +8,5 @@ torchaudio
 transformers
 mediapipe
 streamlit
+ultralytics
+imageio-ffmpeg
