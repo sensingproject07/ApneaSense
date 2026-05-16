@@ -6,12 +6,9 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 AUDIO_MODEL_PATH  = PROJECT_ROOT / "models" / "audio" / "mel_cnn.pth"
 VISION_MODEL_PATH = PROJECT_ROOT / "models" / "vision-spatial" / "attention_fusion.pth"
 CONSUMER_VISION_MODEL_PATH = (
-    PROJECT_ROOT
-    / "experiments" / "artifacts" / "vision-spatial"
-    / "inference_experiments" / "consumer_finetune"
-    / "checkpoints" / "best_consumer_attention_fusion.pth"
+    PROJECT_ROOT / "models" / "vision-spatial" / "best_consumer_attention_fusion.pth"
 )
-YOLO_POSE_MODEL_PATH = PROJECT_ROOT.parent / "yolov8n-pose.pt"
+YOLO_POSE_MODEL_PATH = "yolov8n-pose.pt"
 
 # ── Class names ────────────────────────────────────────────────────────────────
 AUDIO_CLASS_NAMES  = ["non-apnea", "apnea"]
