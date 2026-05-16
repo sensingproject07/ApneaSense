@@ -1,0 +1,164 @@
+{
+  "experiment": "attention_fusion_yolo_joints_eval",
+  "baseline_checkpoint": "C:\\Users\\John joseph peter\\Desktop\\NUS\\ApneaSense\\ApneaSense\\experiments\\artifacts\\vision-spatial\\fusion\\attention_fusion\\checkpoints\\best_attention_fusion.pth",
+  "depth_metadata": {
+    "depth_source": "synthetic",
+    "model_name": "depth-anything/Depth-Anything-V2-Small-hf",
+    "cache_root": "C:\\Users\\John joseph peter\\Desktop\\NUS\\ApneaSense\\ApneaSense\\experiments\\artifacts\\vision-spatial\\inference_experiments\\synthetic_depth_eval\\depth_synth_cache",
+    "generated": 0,
+    "reused": 2160,
+    "depth_preprocess": "body-norm",
+    "body_padding": 0.4
+  },
+  "yolo_model": "C:\\Users\\John joseph peter\\Desktop\\NUS\\ApneaSense\\yolov8n-pose.pt",
+  "yolo_metadata": {
+    "model_path": "C:\\Users\\John joseph peter\\Desktop\\NUS\\ApneaSense\\yolov8n-pose.pt",
+    "conf_threshold": 0.2,
+    "keypoint_shape_example": [
+      1,
+      17,
+      2
+    ]
+  },
+  "test_samples": 2160,
+  "test_subjects": [
+    "00100",
+    "00005",
+    "00055",
+    "00076",
+    "00012",
+    "00070",
+    "00087",
+    "00014",
+    "00018",
+    "00029",
+    "00032",
+    "00036",
+    "00095",
+    "00004",
+    "00015",
+    "00082"
+  ],
+  "class_names": [
+    "supine",
+    "left",
+    "right"
+  ],
+  "detection_rate": {
+    "n_detected": 2155,
+    "n_total": 2160,
+    "fraction": 0.9976851851851852
+  },
+  "synthetic_depth_gt_joints": {
+    "accuracy": 0.8824074074074074,
+    "macro_f1": 0.8777758087381362,
+    "classification_report": {
+      "supine": {
+        "precision": 1.0,
+        "recall": 0.6513888888888889,
+        "f1-score": 0.7888982338099243,
+        "support": 720.0
+      },
+      "left": {
+        "precision": 0.9728629579375848,
+        "recall": 0.9958333333333333,
+        "f1-score": 0.9842141386410432,
+        "support": 720.0
+      },
+      "right": {
+        "precision": 0.7547169811320755,
+        "recall": 1.0,
+        "f1-score": 0.8602150537634409,
+        "support": 720.0
+      },
+      "accuracy": 0.8824074074074074,
+      "macro avg": {
+        "precision": 0.9091933130232203,
+        "recall": 0.8824074074074074,
+        "f1-score": 0.8777758087381362,
+        "support": 2160.0
+      },
+      "weighted avg": {
+        "precision": 0.9091933130232202,
+        "recall": 0.8824074074074074,
+        "f1-score": 0.8777758087381362,
+        "support": 2160.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        469,
+        20,
+        231
+      ],
+      [
+        0,
+        717,
+        3
+      ],
+      [
+        0,
+        0,
+        720
+      ]
+    ]
+  },
+  "synthetic_depth_yolo_joints": {
+    "accuracy": 0.8675925925925926,
+    "macro_f1": 0.8668069060129336,
+    "classification_report": {
+      "supine": {
+        "precision": 1.0,
+        "recall": 0.7375,
+        "f1-score": 0.8489208633093526,
+        "support": 720.0
+      },
+      "left": {
+        "precision": 0.8726355611601513,
+        "recall": 0.9611111111111111,
+        "f1-score": 0.914738929279577,
+        "support": 720.0
+      },
+      "right": {
+        "precision": 0.7787081339712919,
+        "recall": 0.9041666666666667,
+        "f1-score": 0.8367609254498715,
+        "support": 720.0
+      },
+      "accuracy": 0.8675925925925926,
+      "macro avg": {
+        "precision": 0.8837812317104811,
+        "recall": 0.8675925925925926,
+        "f1-score": 0.8668069060129336,
+        "support": 2160.0
+      },
+      "weighted avg": {
+        "precision": 0.8837812317104811,
+        "recall": 0.8675925925925926,
+        "f1-score": 0.8668069060129336,
+        "support": 2160.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        531,
+        32,
+        157
+      ],
+      [
+        0,
+        692,
+        28
+      ],
+      [
+        0,
+        69,
+        651
+      ]
+    ]
+  },
+  "joint_estimation_gap": {
+    "accuracy": -0.014814814814814836,
+    "macro_f1": -0.010968902725202567
+  }
+}

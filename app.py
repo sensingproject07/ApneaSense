@@ -336,7 +336,7 @@ def _show_results(state_key: str):
 
 def _consumer_tab():
     st.markdown("Upload a standard RGB video (MP4, AVI, MOV). Depth and body joints are "
-                "synthesised automatically using Depth Anything v2 and MediaPipe.")
+                "synthesised automatically using Depth Anything v2 and YOLO pose.")
 
     video_file = st.file_uploader(
         "Video file (RGB + audio)", type=["mp4", "avi", "mov", "mkv"],

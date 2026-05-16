@@ -7,10 +7,21 @@ from pathlib import Path
 from typing import List, Dict
 
 import numpy as np
-import streamlit as st
 import torch
 import torchaudio
 import torchaudio.transforms as AT
+
+try:
+    import streamlit as st
+except ImportError:
+    class _StreamlitFallback:
+        @staticmethod
+        def cache_resource(func=None, **_kwargs):
+            if func is None:
+                return lambda wrapped: wrapped
+            return func
+
+    st = _StreamlitFallback()
 
 from .config import (
     SAMPLE_RATE, WINDOW_DURATION, SAMPLES_PER_WINDOW,

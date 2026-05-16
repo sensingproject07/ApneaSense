@@ -1,0 +1,164 @@
+{
+  "experiment": "attention_fusion_yolo_joints_eval",
+  "baseline_checkpoint": "C:\\Users\\John joseph peter\\Desktop\\NUS\\ApneaSense\\ApneaSense\\experiments\\artifacts\\vision-spatial\\fusion\\attention_fusion\\checkpoints\\best_attention_fusion.pth",
+  "depth_metadata": {
+    "depth_source": "synthetic",
+    "model_name": "depth-anything/Depth-Anything-V2-Small-hf",
+    "cache_root": "C:\\Users\\John joseph peter\\Desktop\\NUS\\ApneaSense\\ApneaSense\\experiments\\artifacts\\vision-spatial\\inference_experiments\\synthetic_depth_eval\\depth_synth_cache",
+    "generated": 0,
+    "reused": 2160,
+    "depth_preprocess": "body-norm-invert",
+    "body_padding": 0.15
+  },
+  "yolo_model": "C:\\Users\\John joseph peter\\Desktop\\NUS\\ApneaSense\\yolov8n-pose.pt",
+  "yolo_metadata": {
+    "model_path": "C:\\Users\\John joseph peter\\Desktop\\NUS\\ApneaSense\\yolov8n-pose.pt",
+    "conf_threshold": 0.2,
+    "keypoint_shape_example": [
+      1,
+      17,
+      2
+    ]
+  },
+  "test_samples": 2160,
+  "test_subjects": [
+    "00100",
+    "00005",
+    "00055",
+    "00076",
+    "00012",
+    "00070",
+    "00087",
+    "00014",
+    "00018",
+    "00029",
+    "00032",
+    "00036",
+    "00095",
+    "00004",
+    "00015",
+    "00082"
+  ],
+  "class_names": [
+    "supine",
+    "left",
+    "right"
+  ],
+  "detection_rate": {
+    "n_detected": 2155,
+    "n_total": 2160,
+    "fraction": 0.9976851851851852
+  },
+  "synthetic_depth_gt_joints": {
+    "accuracy": 0.9217592592592593,
+    "macro_f1": 0.9199797012038982,
+    "classification_report": {
+      "supine": {
+        "precision": 1.0,
+        "recall": 0.7694444444444445,
+        "f1-score": 0.869701726844584,
+        "support": 720.0
+      },
+      "left": {
+        "precision": 0.9702300405953992,
+        "recall": 0.9958333333333333,
+        "f1-score": 0.9828649760109665,
+        "support": 720.0
+      },
+      "right": {
+        "precision": 0.8304498269896193,
+        "recall": 1.0,
+        "f1-score": 0.9073724007561437,
+        "support": 720.0
+      },
+      "accuracy": 0.9217592592592593,
+      "macro avg": {
+        "precision": 0.9335599558616728,
+        "recall": 0.9217592592592593,
+        "f1-score": 0.9199797012038982,
+        "support": 2160.0
+      },
+      "weighted avg": {
+        "precision": 0.9335599558616728,
+        "recall": 0.9217592592592593,
+        "f1-score": 0.919979701203898,
+        "support": 2160.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        554,
+        22,
+        144
+      ],
+      [
+        0,
+        717,
+        3
+      ],
+      [
+        0,
+        0,
+        720
+      ]
+    ]
+  },
+  "synthetic_depth_yolo_joints": {
+    "accuracy": 0.8981481481481481,
+    "macro_f1": 0.8981535775748032,
+    "classification_report": {
+      "supine": {
+        "precision": 0.9983136593591906,
+        "recall": 0.8222222222222222,
+        "f1-score": 0.9017517136329017,
+        "support": 720.0
+      },
+      "left": {
+        "precision": 0.8723404255319149,
+        "recall": 0.9680555555555556,
+        "f1-score": 0.9177090190915076,
+        "support": 720.0
+      },
+      "right": {
+        "precision": 0.84765625,
+        "recall": 0.9041666666666667,
+        "f1-score": 0.875,
+        "support": 720.0
+      },
+      "accuracy": 0.8981481481481481,
+      "macro avg": {
+        "precision": 0.9061034449637019,
+        "recall": 0.8981481481481483,
+        "f1-score": 0.8981535775748032,
+        "support": 2160.0
+      },
+      "weighted avg": {
+        "precision": 0.9061034449637019,
+        "recall": 0.8981481481481481,
+        "f1-score": 0.8981535775748032,
+        "support": 2160.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        592,
+        34,
+        94
+      ],
+      [
+        0,
+        697,
+        23
+      ],
+      [
+        1,
+        68,
+        651
+      ]
+    ]
+  },
+  "joint_estimation_gap": {
+    "accuracy": -0.023611111111111138,
+    "macro_f1": -0.021826123629094973
+  }
+}

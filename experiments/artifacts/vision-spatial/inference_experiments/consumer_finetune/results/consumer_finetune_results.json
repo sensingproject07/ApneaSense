@@ -1,0 +1,196 @@
+{
+  "experiment": "consumer_attention_fusion_finetune",
+  "source_checkpoint": "C:\\Users\\John joseph peter\\Desktop\\NUS\\ApneaSense\\ApneaSense\\experiments\\artifacts\\vision-spatial\\fusion\\attention_fusion\\checkpoints\\best_attention_fusion.pth",
+  "consumer_checkpoint": "C:\\Users\\John joseph peter\\Desktop\\NUS\\ApneaSense\\ApneaSense\\experiments\\artifacts\\vision-spatial\\inference_experiments\\consumer_finetune\\checkpoints\\best_consumer_attention_fusion.pth",
+  "best_epoch": 1,
+  "best_val_macro_f1": 0.9980246913580247,
+  "train_samples": 9585,
+  "val_samples": 2025,
+  "test_samples": 2160,
+  "test_subjects": [
+    "00100",
+    "00005",
+    "00055",
+    "00076",
+    "00012",
+    "00070",
+    "00087",
+    "00014",
+    "00018",
+    "00029",
+    "00032",
+    "00036",
+    "00095",
+    "00004",
+    "00015",
+    "00082"
+  ],
+  "yolo_metadata": {
+    "train": {
+      "model_path": "C:\\Users\\John joseph peter\\Desktop\\NUS\\ApneaSense\\yolov8n-pose.pt",
+      "conf_threshold": 0.2,
+      "keypoint_shape_example": [
+        1,
+        17,
+        2
+      ],
+      "n_detected": 9561,
+      "n_total": 9585,
+      "fraction": 0.9974960876369328
+    },
+    "val": {
+      "model_path": "C:\\Users\\John joseph peter\\Desktop\\NUS\\ApneaSense\\yolov8n-pose.pt",
+      "conf_threshold": 0.2,
+      "keypoint_shape_example": [
+        1,
+        17,
+        2
+      ],
+      "n_detected": 2016,
+      "n_total": 2025,
+      "fraction": 0.9955555555555555
+    },
+    "test": {
+      "model_path": "C:\\Users\\John joseph peter\\Desktop\\NUS\\ApneaSense\\yolov8n-pose.pt",
+      "conf_threshold": 0.2,
+      "keypoint_shape_example": [
+        1,
+        17,
+        2
+      ],
+      "n_detected": 2155,
+      "n_total": 2160,
+      "fraction": 0.9976851851851852
+    }
+  },
+  "config": {
+    "depth_preprocess": "body-norm-invert",
+    "body_padding": 0.0,
+    "norm_low": 2.0,
+    "norm_high": 98.0,
+    "trainable": [
+      "depth_proj",
+      "modality_embed",
+      "attention_block",
+      "classifier"
+    ],
+    "batch_size": 32,
+    "epochs": 8,
+    "lr": 0.0003,
+    "weight_decay": 0.0001
+  },
+  "baseline_test": {
+    "loss": 0.30747750199824464,
+    "accuracy": 0.9027777777777778,
+    "macro_f1": 0.9029485390204609,
+    "classification_report": {
+      "supine": {
+        "precision": 0.9918032786885246,
+        "recall": 0.8402777777777778,
+        "f1-score": 0.9097744360902256,
+        "support": 720.0
+      },
+      "left": {
+        "precision": 0.8767471410419314,
+        "recall": 0.9583333333333334,
+        "f1-score": 0.9157266091572661,
+        "support": 720.0
+      },
+      "right": {
+        "precision": 0.8584534731323722,
+        "recall": 0.9097222222222222,
+        "f1-score": 0.8833445718138908,
+        "support": 720.0
+      },
+      "accuracy": 0.9027777777777778,
+      "macro avg": {
+        "precision": 0.9090012976209428,
+        "recall": 0.9027777777777778,
+        "f1-score": 0.9029485390204609,
+        "support": 2160.0
+      },
+      "weighted avg": {
+        "precision": 0.9090012976209428,
+        "recall": 0.9027777777777778,
+        "f1-score": 0.9029485390204608,
+        "support": 2160.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        605,
+        33,
+        82
+      ],
+      [
+        4,
+        690,
+        26
+      ],
+      [
+        1,
+        64,
+        655
+      ]
+    ]
+  },
+  "finetuned_test": {
+    "loss": 0.0462651047787136,
+    "accuracy": 0.9847222222222223,
+    "macro_f1": 0.9847127960798421,
+    "classification_report": {
+      "supine": {
+        "precision": 0.9804741980474198,
+        "recall": 0.9763888888888889,
+        "f1-score": 0.9784272790535838,
+        "support": 720.0
+      },
+      "left": {
+        "precision": 0.9782312925170068,
+        "recall": 0.9986111111111111,
+        "f1-score": 0.9883161512027492,
+        "support": 720.0
+      },
+      "right": {
+        "precision": 0.9957627118644068,
+        "recall": 0.9791666666666666,
+        "f1-score": 0.9873949579831933,
+        "support": 720.0
+      },
+      "accuracy": 0.9847222222222223,
+      "macro avg": {
+        "precision": 0.9848227341429444,
+        "recall": 0.9847222222222222,
+        "f1-score": 0.9847127960798421,
+        "support": 2160.0
+      },
+      "weighted avg": {
+        "precision": 0.9848227341429444,
+        "recall": 0.9847222222222223,
+        "f1-score": 0.9847127960798423,
+        "support": 2160.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        703,
+        14,
+        3
+      ],
+      [
+        1,
+        719,
+        0
+      ],
+      [
+        13,
+        2,
+        705
+      ]
+    ]
+  },
+  "delta": {
+    "accuracy": 0.08194444444444449,
+    "macro_f1": 0.08176425705938117
+  }
+}
